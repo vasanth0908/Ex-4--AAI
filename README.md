@@ -1,6 +1,6 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
-<H3>EX. NO.4</H3>
+<H3>ENTER YOUR NAME : VASANTH S
+<H3>ENTER YOUR REGISTER NO : 212222110052
+<H3>EX. NO.4
 <H3>DATE:</H3>
 <H1 ALIGN =CENTER> Implementation of Hidden Markov Model</H1>
 
@@ -21,10 +21,31 @@ Step 8:Calculate the probability of the observed sequence by summing the last ro
 Step 9:Find the most likely sequence of hidden states by selecting the hidden state with the highest probability at each time step based on the alpha matrix.<br>
 
 ## Program:
-Insert your Program here
+```
+import numpy as np
+transition_matrix = np.array([[0.7, 0.3],[0.4, 0.6]])
+emission_matrix = np.array([[0.1, 0.9],[0.8,0.2]])
+initial_prob = np.array([0.5, 0.5])
+obs_seq = np.array([1,1,1,0,0,1])
+alpha = np.zeros((len(obs_seq),len(initial_prob)))
+alpha[0, :] = initial_prob * emission_matrix[:, obs_seq[0]]
+for t in range(1, len(obs_seq)):
+    for j in range(len(initial_prob)):
 
+        alpha[t, j] = emission_matrix[j,
+        obs_seq[t]]*np.sum(alpha[t-1,:] *
+        transition_matrix[:, j])
+probability = np.sum(alpha[-1, :])
+print("The prob of observed seq is:", probability)
+most_likely = []
+for t in range(len(obs_seq)):
+    if alpha[t, 0] > alpha[t,1]:
+        most_likely.append("sunny")
+    else:
+        most_likely.append("rainy")
+```
 ## Output:
-Show your results here
+![314073363-3f557ea5-a883-4726-bbf6-0e5bd3aeb446](https://github.com/user-attachments/assets/07c20371-feb1-4fb7-b12b-5f2cceec28ab)
 
 ## Result:
 Thus Hidden Markov Model is implemented using python.
